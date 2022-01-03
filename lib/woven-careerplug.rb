@@ -62,12 +62,12 @@ def bill_for(month, active_subscription = nil, users = {})
   invoice[total_usage] = 0
   invoice[active_users] = 0
 
-  return invoice if active_subscription.nil? || users.length == 0
+  return invoice if active_subscription.nil? || users.length.zero?
 
   deactivated_users = 0
 
   monthly_rate = :monthly_price_in_dollars
-  if !active_subscription.nil? && users.length > 0
+  if !active_subscription.nil? && users.length.positive?
     daily_rate = active_subscription[monthly_rate].to_f / days_in_month.to_i
 
     users.each do |employee|
